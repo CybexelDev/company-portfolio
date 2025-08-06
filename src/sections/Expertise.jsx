@@ -39,7 +39,7 @@ const Expertise = () => {
               </div>
 
               {/* Back Side */}
-              <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-blue-400  text-white font-bold rounded-2xl shadow-xl p-6 overflow-y-auto flex flex-col justify-center">
+              <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50   text-black  rounded-2xl shadow-lg p-6 overflow-y-auto flex flex-col justify-center shadow-purple-200">
                 <h4 className="text-xl font-extrabold mb-4 text-center ">
                  {section.title}
                 </h4>
@@ -76,7 +76,7 @@ const Expertise = () => {
               </div>
 
               {/* Back Side (separate stacked card) */}
-              <div className="w-full text-blue-600 font-bold rounded-2xl shadow-xl p-6 flex flex-col justify-center">
+              <div className="w-full bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50  rounded-2xl shadow-xl p-6 flex flex-col justify-center">
                 <h4 className="text-lg font-extrabold mb-4 flex items-center gap-2">
                   {section.icon} {section.title}
                 </h4>

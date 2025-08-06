@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Footer from "../../../components/Footer";
 import video5 from "../../../assets/videos/video5.mp4"
 import { Sparkles } from "lucide-react"; 
+import { Link } from "react-router-dom";
 
 const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
   const modalRef = useRef(null);
@@ -104,7 +105,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
                 {/* Right Section - Video */}
                 <div className="w-full md:w-[85%] rounded-3xl overflow-hidden mt-6 md:mt-10 aspect-video order-1 md:order-2">
                   <video
-                    src={activeCard.video1 || video5}
+                    src={activeCard.landscape_video }
                     autoPlay
                     loop
                     muted
@@ -118,12 +119,12 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
             {/* Two Side-by-Side Images */}
             <div className="grid px-0 md:px-6 grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 justify-center items-center">
               <img
-                src={activeCard.image1 || activeCard.image}
+                src={activeCard.portrait_image1 || activeCard.image}
                 alt=""
                 className="w-full max-h-[90vh] aspect-[4/5] object-cover rounded-4xl"
               />
               <img
-                src={activeCard.image2 || activeCard.image}
+                src={activeCard.portrait_image2 || activeCard.image}
                 alt=""
                 className="w-full max-h-[90vh] aspect-[4/5] object-cover object-bottom rounded-4xl"
               />
@@ -136,7 +137,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
               <div className="w-full md:w-3/5 flex justify-center items-center">
                 <div className="h-[60] md:h-[90vh] aspect-[4/5] rounded-4xl overflow-hidden">
                   <video
-                    src={activeCard.video2 || video5 }
+                    src={activeCard.portrait_video || video5 }
                     autoPlay
                     loop
                     muted
@@ -149,10 +150,10 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
               {/* Text Section */}
               <div className="w-full md:w-2/5 flex flex-col justify-center text-start md:text-left p-2 md:p-3">
                 <h3 className="text-3xl bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent md:text-5xl font-semibold mb-4">
-                  {activeCard.subTitle || "Feature Title"}
+                  {activeCard.full_name || "Feature Title"}
                 </h3>
                 <p className="text-lg bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent md:text-2xl text-justify ">
-                  {activeCard.subDescription || "Description goes here for this section. go get it Description goes here for this section"}
+                  {activeCard.description || "Description goes here for this section. go get it Description goes here for this section"}
                 </p>
               </div>
             </div>
@@ -168,12 +169,12 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
     <div className="text-center md:text-left space-y-6">
       <h3 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900">
         <span className="bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">
-          Highlights
+          Tech Used
         </span>
       </h3>
 
       <ul className="space-y-4">
-        {(activeCard.points || ["Point 1", "Point 2", "Point 3", "Point 4", "Point 5"]).map((point, idx) => (
+        {(activeCard.tech_used || ["Point 1", "Point 2", "Point 3", "Point 4", "Point 5"]).map((point, idx) => (
           <li key={idx} className="flex items-start gap-3">
             <Sparkles className="w-5 h-5 mt-1 text-purple-500" />
             <span className="text-lg sm:text-xl md:text-2xl font-semibold bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">
@@ -188,7 +189,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
   {/* Right: Image Section */}
   <div className="w-full md:w-1/2 mt-10 md:mt-0 flex justify-center">
     <img
-      src={activeCard.image3 || activeCard.image}
+      src={activeCard.portrait_image3 }
       alt="Highlight"
       className="w-full max-w-[500px] h-[60vh] md:h-[90vh] object-cover rounded-xl shadow-lg"
     />
@@ -199,15 +200,14 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
 
             {/* CTA Link */}
             <div className="text-center">
-              <a
-                href={activeCard.link || "#"}
-                target="_blank"
+              <Link
+                to={"/contact"}
                 rel="noopener noreferrer"
                 className="inline-block bg-[#9cd7f7] font-semibold px-6 py-3 rounded-full hover:scale-105 hover:bg-black hover:text-white hover:shadow-xl transition"
               >
                 <span className="bg-gradient-to-r from-pink-500  to-indigo-700 bg-clip-text text-transparent">Let's Work Together </span>
                 
-              </a>
+              </Link>
             </div>
 
             {/* Scroll Message */}

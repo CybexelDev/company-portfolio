@@ -13,10 +13,10 @@ const CardGrid = ({ cards, setActiveCard, setScrolled }) => {
             className={`relative rounded-2xl overflow-hidden bg-cover bg-center text-white p-4 flex cursor-pointer ${
               isFullWidth ? "col-span-2 aspect-[2/1]" : "col-span-1 aspect-[3/4]"
             }`}
-            style={{ backgroundImage: `url(${card.image})` }}
+            style={{ backgroundImage: `url(${card.landscape_image})` }}
           >
             <h2 className="text-xl font-bold bg-opacity-40 px-2 py-1 rounded">
-              {card.title}
+              {card.name}
             </h2>
           </div>
         );

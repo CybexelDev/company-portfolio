@@ -2,14 +2,23 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CardGrid from "./CardGrid";
 import Modal from "./Modal";
-import works from "../../../assets/datas/works.js";
+import { fetchWorks } from "../../../api/api.js";
 
 const CardGridWithModal = () => {
   const [activeCard, setActiveCard] = useState(null);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const [cards, setCards] = useState([])
+  useEffect(() => {
+      fetchWorks()
+        .then((res) =>{
+          console.log("Fetched works from backend:", res.data);
+           setCards(res.data)
+        })
+        .catch((err) => console.error("Failed to load team members:", err));
+    }, []);
 
-  const cards = works;
+  
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -21,7 +30,7 @@ const CardGridWithModal = () => {
         setScrolled(false);
       }
     }
-  }, [location.search]);
+  }, [location.search, cards]);
 
   useEffect(() => {
     document.body.style.overflow = activeCard ? "hidden" : "auto";
