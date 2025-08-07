@@ -12,7 +12,7 @@ import { useScroll } from '../components/ScrollContext';
 function Home() {
   const [bgChange, setBgChange] = useState(false);
   const {scrollY} = useScroll();
-  console.log("curent: ",{scrollY})
+  // console.log("curent: ",{scrollY})
 
   useEffect(() => { 
       if (scrollY > 2514 && scrollY < 4160) {

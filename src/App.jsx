@@ -1,13 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Contact from "./sections/Contact";
 import Expertise from "./sections/Expertise";
 import About from "./sections/About";
 import Work from "./sections/Work";
 import Home from "./sections/Home";
-import ScrollToTop from "./components/ScrollToTop"; // optional
-import { useEffect, useState,  } from "react";
 
 function App() {
 

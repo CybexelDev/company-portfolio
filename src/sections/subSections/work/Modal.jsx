@@ -63,9 +63,9 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
           }}
         >
        {/* Close and Category Row */}
-        <div className="sticky top-0 z-50 flex justify-between items-center p-4 bg-white/0">
+        <div className="sticky top-0 z-50 flex justify-between items-center p-4 ">
           {/* Category Button - Left */}
-          <span className="bg-white hover:bg-black/70 hover:scale-105 transition-transform text-sm font-semibold ml-7 px-4 py-2 rounded-full shadow   transition-normal">
+          <span className="bg-black hover:bg-white/30 hover:scale-105 transition-transform text-sm font-semibold ml-7 px-4 py-2 rounded-full shadow   transition-normal">
             <span className="bg-gradient-to-r from-pink-500  to-indigo-500 bg-clip-text text-transparent  ">
             {activeCard.category || "Category"}
           </span>
@@ -91,7 +91,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
                 
                 {/* Left Section - Title and Link */}
                 <div className="w-full md:w-[15%] flex flex-col items-center justify-center space-y-4 order-2 md:order-1">
-                  <h2 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">{activeCard.title}</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">{activeCard.name}</h2>
                   <a
                     href={activeCard.link || "#"}
                     target="_blank"

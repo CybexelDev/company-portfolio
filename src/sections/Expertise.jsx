@@ -1,113 +1,240 @@
-import React from 'react';
-import Footer from '../components/Footer';
+import React, { useEffect, useState } from "react";
+import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
+import ExpertiseHero from "./subSections/expertise/ExpertiseHero";
+import { fetchExpertise, fetchExpertiseDetail } from "../api/api";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
-import ScrollToTop from '../components/ScrollToTop';
-import sections from '../assets/datas/secData'; // Your renamed file or location
-import sectionItems from '../assets/datas/secItemsData';
-import ExpertiseHero from './subSections/expertise/ExpertiseHero';
+// Static card background images
+import wedo from "../assets/images/wedo.gif";
+import design from "../assets/images/design.webp";
+import tech from "../assets/images/tech.gif";
+import categor from "../assets/images/categer.webp";
+
+// Section labels matching Django model choices
+const SECTION_LABELS = {
+  whatwedo: "What We Do",
+  design: "Design",
+  technologies: "Technologies",
+  category: "Category",
+};
+
+const SECTION_IMAGES = {
+  whatwedo: wedo,
+  design: design,
+  technologies: tech,
+  category: categor,
+};
 
 const Expertise = () => {
+  const [expertiseItems, setExpertiseItems] = useState([]);
+  const [activeItem, setActiveItem] = useState(null);
+
+  useEffect(() => {
+    fetchExpertise()
+      .then((res) => setExpertiseItems(res.data))
+      .catch((err) => console.error("Failed to load expertise:", err));
+  }, []);
+
+  const openItem = (id) => {
+    fetchExpertiseDetail(id)
+      .then((res) => setActiveItem(res.data))
+      .catch((err) => console.error("Failed to load detail:", err));
+  };
+
+  const groupedSections = Object.keys(SECTION_LABELS).map((sectionKey) => ({
+    key: sectionKey,
+    title: SECTION_LABELS[sectionKey],
+    items: expertiseItems.filter((item) => item.section === sectionKey).slice(0, 5),
+    image: SECTION_IMAGES[sectionKey] || "",
+  }));
+
   return (
-    <div className='bg-gradient-to-r from-blue-200 via-purple-200 to-blue-200 pt-8'>
+    <div className="bg-gradient-to-r from-blue-200 via-purple-200 to-blue-200 pt-8">
       <ScrollToTop />
       <ExpertiseHero />
+
       <section className="w-full px-4 py-12">
-  <div className="max-w-6xl mx-auto">
-    <h2 className="text-4xl font-bold text-center text-black/70 mb-10">
-      EXPERTISE IN
-    </h2>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-black/70 mb-10">
+            EXPERTISE IN
+          </h2>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 py-16">
-      {sections.map((section, index) => {
-        const items = sectionItems.filter(item => item.sectionId === section.id);
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4 py-16">
+            {groupedSections.map((section) => (
+              <div key={section.key} className="perspective">
+                {/* Desktop / Large Screen → Flip Card */}
+                <div className="hidden sm:block relative w-full min-h-[320px] transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
+                  {/* Front Side */}
+                  <div className="absolute w-full h-full backface-hidden rounded-2xl">
+                    {section.image && (
+                      <img
+                        src={section.image}
+                        alt={section.title}
+                        className="w-full h-full object-cover rounded-2xl"
+                      />
+                    )}
+                    <h3 className="absolute bottom-5 left-5 text-xl font-semibold text-white bg-black/40 py-1 px-2 rounded-xl">
+                      {section.title}
+                    </h3>
+                  </div>
 
-        return (
-          <div key={index} className="perspective">
-            {/* Desktop / Large Screen → Flip Card */}
-            <div className="hidden sm:block relative w-full min-h-[320px] transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
-              {/* Front Side */}
-              <div className="absolute w-full h-full backface-hidden rounded-2xl">
-                <img
-                  src={section.image}
-                  alt={section.title}
-                  className="w-full h-full object-cover rounded-2xl"
-                />
-                {/* Title only visible on desktop */}
-                <h3 className="absolute bottom-5 left-5 text-xl font-semibold text-white bg-black/40 py-1 px-2 rounded-xl backdrop-blur-3xl">
-                  {section.title}
-                </h3>
+                  {/* Back Side */}
+                  <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50 text-black rounded-2xl p-6 overflow-y-auto flex flex-col justify-center">
+                    <h4 className="text-xl font-extrabold mb-4 text-center">{section.title}</h4>
+                    <ul className="space-y-3">
+                      {section.items.map((item) => (
+                        <li key={item.id}>
+                          <button
+                            onClick={() => openItem(item.id)}
+                            className="flex items-center gap-2 hover:font-bold hover:text-black hover:underline hover:scale-105 transition"
+                          >
+                            <span>{item.name}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Mobile / Small Screen → Stacked Card */}
+                <div className="block sm:hidden space-y-4">
+                  {/* Image Card */}
+                  <div className="w-full min-h-[220px] rounded-2xl overflow-hidden">
+                    {section.image && (
+                      <img
+                        src={section.image}
+                        alt={section.title}
+                        className="w-full h-full object-cover rounded-2xl"
+                      />
+                    )}
+                  </div>
+
+                  {/* Back Card */}
+                  <div className="w-full bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50 rounded-2xl shadow-xl p-6 flex flex-col justify-center">
+                    <h4 className="text-lg font-extrabold mb-4">{section.title}</h4>
+                    <ul className="space-y-3">
+                      {section.items.map((item) => (
+                        <li key={item.id}>
+                          <button
+                            onClick={() => openItem(item.id)}
+                            className="flex items-center gap-2 hover:font-bold hover:text-black transition"
+                          >
+                            <span>{item.name}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
               </div>
-
-              {/* Back Side */}
-              <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50   text-black  rounded-2xl shadow-lg p-6 overflow-y-auto flex flex-col justify-center shadow-purple-200">
-                <h4 className="text-xl font-extrabold mb-4 text-center ">
-                 {section.title}
-                </h4>
-                <ul className="space-y-3">
-                  {items.map((item, idx) => (
-                    <li key={idx}>
-                      <a
-                        href={item.href || "#"}
-                        className="flex items-center gap-2 hover:font-bold hover:text-black hover:underline hover:scale-105 transition"
-                      >
-                        {item.icon &&
-                          React.createElement(item.icon, {
-                            className: "w-4 h-4",
-                          })}
-                        <span>
-                          {item.title}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* Mobile / Small Screen → Stacked Card */}
-            <div className="block sm:hidden space-y-4">
-              {/* Front Side (only image, no text) */}
-              <div className="w-full min-h-[220px] rounded-2xl overflow-hidden">
-                <img
-                  src={section.image}
-                  alt={section.title}
-                  className="w-full h-full object-cover rounded-2xl"
-                />
-              </div>
-
-              {/* Back Side (separate stacked card) */}
-              <div className="w-full bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50  rounded-2xl shadow-xl p-6 flex flex-col justify-center">
-                <h4 className="text-lg font-extrabold mb-4 flex items-center gap-2">
-                  {section.icon} {section.title}
-                </h4>
-                <ul className="space-y-3">
-                  {items.map((item, idx) => (
-                    <li key={idx}>
-                      <a
-                        href={item.href || "#"}
-                        className="flex items-center gap-2 hover:font-bold hover:text-black transition"
-                      >
-                        {item.icon &&
-                          React.createElement(item.icon, {
-                            className: "w-4 h-4",
-                          })}
-                        <span>
-                          {item.title}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            ))}
           </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
       <Footer />
+
+      {/* Modal with shutter effect */}
+   <AnimatePresence>
+  {activeItem && (
+    <motion.div
+      className="fixed inset-0 bg-gradient-to-r from-pink-500 to-indigo-500 flex items-center justify-center z-50 px-4"
+      initial={{ y: "-100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "-100%" }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
+    >
+      <div className=" w-full h-full overflow-y-auto text-white relative">
+
+        {/* Section 1: Sticky Top Buttons */}
+        <div className="sticky top-0 left-0 right-0 flex justify-between items-center z-10 py-3 px-4 ">
+          {/* Name Button */}
+          <div className="bg-black px-4 py-2 rounded-full">
+            <span className="bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-transparent font-bold">
+              {activeItem.name}
+            </span>
+          </div>
+          {/* Close Button */}
+          <button
+            onClick={() => setActiveItem(null)}
+            className="bg-black px-4 py-2 rounded-full hover:bg-white/30 font-bold"
+          >
+            Close
+          </button>
+        </div>
+
+        {/* Section 2: Large Image with Title + Description */}
+        <section className="py-10 flex flex-col items-center text-center">
+          {/* Title */}
+          <h1 className="text-3xl font-bold mb-6">{activeItem.title}</h1>
+          {/* Image */}
+          <img
+            src={activeItem.image_l}
+            alt={activeItem.title}
+            className="rounded-2xl object-cover"
+            style={{ width: "90vw", height: "90vh" }}
+          />
+          {/* Description */}
+          <p className="mt-6 text-justify text-2xl max-w-6xl">{activeItem.description} {activeItem.description}{activeItem.description}</p>
+        </section>
+
+        {/* Section 3: Two Content Blocks (Image + Title + Description) */}
+        <section className="py-10 max-w-6xl flex mx-auto px-10">
+        {/* Wrapper for both blocks */}
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+
+          {/* Block 1 - Image 60% | Text 40% */}
+          <div className="flex flex-col md:flex-row lg:w-1/2 h-full">
+            {/* Image - 60% */}
+            <div className="md:w-2/4 w-full">
+              <img
+                src={activeItem.image_p1}
+                alt={activeItem.sub_title1}
+                className="rounded-xl w-full h-full object-cover"
+              />
+            </div>
+            {/* Text - 40% */}
+            <div className="md:w-2/4 w-full text-xl flex flex-col justify-center p-4">
+              <h2 className="text-2xl font-semibold ">{activeItem.sub_title1}</h2>
+              <p className="mt-2">{activeItem.sub_description1}</p>
+            </div>
+          </div>
+
+          {/* Block 2 - Match height of Block 1 */}
+          <div className="flex flex-col lg:w-1/2 ">
+            {/* Image - takes top half */}
+            <div className="flex-1">
+              <img
+                src={activeItem.image_p2}
+                alt={activeItem.sub_title2}
+                className="rounded-xl w-full  aspect-[7/4] object-cover"
+              />
+            </div>
+            {/* Text - takes bottom half */}
+            <div className="p-4 flex flex-col text-xl justify-center flex-1 ">
+              <h2 className="text-2xl font-semibold ">{activeItem.sub_title2}</h2>
+              <p className="mt-2">{activeItem.sub_description2}</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+        {/* Section 4: CTA Button */}
+        <section className="py-12 text-center">
+          <Link to={"/contact"} className="px-6 py-3 bg-blue-600 rounded-full text-lg font-semibold hover:bg-blue-700">
+            Work With Us
+          </Link>
+        </section>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
+
+
     </div>
   );
 };
