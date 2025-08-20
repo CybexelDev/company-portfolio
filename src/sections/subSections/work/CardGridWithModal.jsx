@@ -82,18 +82,18 @@ const CardGridWithModal = () => {
           <button
             key={value}
             onClick={() => toggleFilter(value)}
-            className={`px-4 py-2 rounded-full border transition-all duration-300
+            className={`px-4 py-2 rounded-full border-2 transition-all duration-300
               ${
                 selectedFilters.includes(value)
-                  ? "bg-black text-black border-white"
-                  : "bg-transparent text-white border-white hover:bg-black/25 "
+                  ? "bg-[#4520e9] text-white border-white"
+                  : "text-black backdrop-blur-lg   hover:bg-[#4520e9]/80 hover:text-white "
               }
             `}
           >
-            <span className="bg-gradient-to-r from-pink-500  to-indigo-500 bg-clip-text text-transparent">{label}</span>
+            <span className="">{label}</span>
           </button>
         ))}
-        <button onClick={() => setSelectedFilters([])}><span className="bg-gradient-to-r from-pink-500  to-indigo-500 bg-clip-text text-transparent hover:text-black">Clear All</span></button>
+        <button onClick={() => setSelectedFilters([])}><span className="text-[#4520e9] hover:text-black hover:font-extrabold">Clear All</span></button>
 
       </div>
 

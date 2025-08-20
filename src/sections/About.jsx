@@ -12,7 +12,8 @@ function About() {
   
 
   return (
-    <main className="bg-gradient-to-l from-[#c5d8fc] via-[#e2d3fd] to-[#fce9ef] transition-colors duration-500">
+    // <main className="bg-gradient-to-l from-[#c5d8fc] via-[#e2d3fd] to-[#fce9ef] transition-colors duration-500">
+    <main className="bg-gradient-to-br from-blue-200 to-sky-200">
       <div
         className=""
       >

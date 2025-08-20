@@ -5,11 +5,12 @@ import ExpertiseHero from "./subSections/expertise/ExpertiseHero";
 import { fetchExpertise, fetchExpertiseDetail } from "../api/api";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import { MdOutlineAdsClick } from "react-icons/md";
 
 // Static card background images
 import wedo from "../assets/images/wedo.gif";
-import design from "../assets/images/design.webp";
-import tech from "../assets/images/tech.gif";
+import tech from "../assets/images/design.webp";
+import design from "../assets/images/tech.gif";
 import categor from "../assets/images/categer.webp";
 
 // Section labels matching Django model choices
@@ -25,6 +26,12 @@ const SECTION_IMAGES = {
   design: design,
   technologies: tech,
   category: categor,
+};
+const SECTION_BG = {
+  whatwedo: "#2bc3f5",
+  design: "#91d62c",
+  technologies: "#fa9d21",
+  category: "#e3132c",
 };
 
 const Expertise = () => {
@@ -57,7 +64,8 @@ const Expertise = () => {
 
       <section className="w-full px-4 py-12">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-black/70 mb-10">
+          <h2 className="text-4xl font-bold text-center text-blue-700 mb-10">
+          
             EXPERTISE IN
           </h2>
 
@@ -67,21 +75,46 @@ const Expertise = () => {
                 {/* Desktop / Large Screen → Flip Card */}
                 <div className="hidden sm:block relative w-full min-h-[320px] transition-transform duration-700 transform-style-preserve-3d hover:rotate-y-180">
                   {/* Front Side */}
-                  <div className="absolute w-full h-full backface-hidden rounded-2xl">
-                    {section.image && (
-                      <img
-                        src={section.image}
-                        alt={section.title}
-                        className="w-full h-full object-cover rounded-2xl"
-                      />
-                    )}
-                    <h3 className="absolute bottom-5 left-5 text-xl font-semibold text-white bg-black/40 py-1 px-2 rounded-xl">
-                      {section.title}
-                    </h3>
-                  </div>
+                  <div className="absolute w-full h-full backface-hidden rounded-2xl overflow-hidden">
+  {section.image && (
+    <img
+      src={section.image}
+      alt={section.title}
+      className="w-full h-full object-cover rounded-2xl"
+    />
+  )}
+
+  {/* Glass overlay */}
+  <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop- opacity-100  transition duration-300">
+    <span className="flex text-blue-700 text-lg font-semibold px-4 py-2 bg-white/90 rounded-xl shadow-lg">
+      <span>More details</span>
+      <motion.span
+                                    className="w-5 h-5 flex py-"
+                                    animate={{
+                                      x: [0, 5, 0],
+                                    }}
+                                    transition={{
+                                      duration: 1.2,
+                                      repeat: Infinity,
+                                      ease: "easeInOut",
+                                    }}
+                                  >
+                                    <MdOutlineAdsClick className="w-8 h-8" />
+                                  </motion.span>
+    </span>
+    
+  </div>
+
+  {/* Title at bottom */}
+  <h3 className="absolute bottom-5 left-5 text-xl font-semibold text-white bg-black/40 py-1 px-2 rounded-xl">
+    {section.title}
+  </h3>
+</div>
+
 
                   {/* Back Side */}
-                  <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50 text-black rounded-2xl p-6 overflow-y-auto flex flex-col justify-center">
+                  <div className="absolute w-full h-full backface-hidden rotate-y-180  text-white rounded-2xl p-6 overflow-y-auto flex flex-col justify-center"
+                  style={{ backgroundColor: SECTION_BG[section.key] }}>
                     <h4 className="text-xl font-extrabold mb-4 text-center">{section.title}</h4>
                     <ul className="space-y-3">
                       {section.items.map((item) => (
@@ -91,6 +124,20 @@ const Expertise = () => {
                             className="flex items-center gap-2 hover:font-bold hover:text-black hover:underline hover:scale-105 transition"
                           >
                             <span>{item.name}</span>
+                            {/* Icon animation */}
+                                  <motion.span
+                                    className="w-5 h-5"
+                                    animate={{
+                                      x: [0, 5, 0],
+                                    }}
+                                    transition={{
+                                      duration: 1.2,
+                                      repeat: Infinity,
+                                      ease: "easeInOut",
+                                    }}
+                                  >
+                                    <MdOutlineAdsClick className="w-5 h-5" />
+                                  </motion.span>
                           </button>
                         </li>
                       ))}
@@ -112,16 +159,31 @@ const Expertise = () => {
                   </div>
 
                   {/* Back Card */}
-                  <div className="w-full bg-gradient-to-r from-sky-500/50 via-sky-600/50 to-purple-500/50 rounded-2xl shadow-xl p-6 flex flex-col justify-center">
+                  <div className="w-full  rounded-2xl shadow-xl p-6 flex flex-col text-white  justify-center"
+                  style={{ backgroundColor: SECTION_BG[section.key] }}>
                     <h4 className="text-lg font-extrabold mb-4">{section.title}</h4>
                     <ul className="space-y-3">
                       {section.items.map((item) => (
                         <li key={item.id}>
                           <button
                             onClick={() => openItem(item.id)}
-                            className="flex items-center gap-2 hover:font-bold hover:text-black transition"
+                            className="flex items-center gap-2  hover:font-bold hover:text-black transition"
                           >
-                            <span>{item.name}</span>
+                            <span >{item.name} </span>
+                              <motion.span
+        className="w-5 h-5"
+        animate={{
+          x: [0, 5, 0],
+        }}
+        transition={{
+          duration: 1.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        <MdOutlineAdsClick className="w-5 h-5" />
+      </motion.span>
+            
                           </button>
                         </li>
                       ))}
@@ -140,7 +202,7 @@ const Expertise = () => {
    <AnimatePresence>
   {activeItem && (
     <motion.div
-      className="fixed inset-0 bg-gradient-to-r from-pink-500 to-indigo-500 flex items-center justify-center z-50 px-4"
+      className="fixed inset-0 bg-gradient-to-r from-[#b5f7fd] via-black/10 to-[#c6f4d8] backdrop-blur-3xl flex items-center justify-center z-50 px-4"
       initial={{ y: "-100%" }}
       animate={{ y: 0 }}
       exit={{ y: "-100%" }}
@@ -159,7 +221,7 @@ const Expertise = () => {
           {/* Close Button */}
           <button
             onClick={() => setActiveItem(null)}
-            className="bg-black px-4 py-2 rounded-full hover:bg-white/30 font-bold"
+            className="bg-black px-4 py-2 rounded-full hover:bg-white/50 hover:text-black  font-bold"
           >
             Close
           </button>
@@ -174,10 +236,10 @@ const Expertise = () => {
             src={activeItem.image_l}
             alt={activeItem.title}
             className="rounded-2xl object-cover"
-            style={{ width: "90vw", height: "90vh" }}
+            style={{ width: "80vw", height: "90vh" }}
           />
           {/* Description */}
-          <p className="mt-6 text-justify text-2xl max-w-6xl">{activeItem.description} {activeItem.description}{activeItem.description}</p>
+          <p className="mt-6 text-justify text-xl max-w-5xl"> {activeItem.description}</p>
         </section>
 
         {/* Section 3: Two Content Blocks (Image + Title + Description) */}
@@ -225,7 +287,7 @@ const Expertise = () => {
 
         {/* Section 4: CTA Button */}
         <section className="py-12 text-center">
-          <Link to={"/contact"} className="px-6 py-3 bg-blue-600 rounded-full text-lg font-semibold hover:bg-blue-700">
+          <Link to={"/contact"} className="px-6 py-3 bg-blue-600 rounded-full text-lg font-semibold hover:bg-white/70 hover:text-blue-500">
             Work With Us
           </Link>
         </section>

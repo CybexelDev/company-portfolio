@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 import ContactHero from '../sections/subSections/contact/ContactHero';
+import FindUsOffline from './subSections/contact/FindUsOffline';
 
 function Contact() {
   return (
@@ -9,6 +10,7 @@ function Contact() {
     
       <ScrollToTop />
       <ContactHero />
+      <FindUsOffline />
       <Footer />
     </div>
   )

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import work from "../../../assets/images/work.webp"
+import work from "../../../assets/images/work/workhero.png"
 
 const Hero = () => {
   return (
@@ -12,8 +12,14 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="text-5xl md:text-7xl font-bold leading-tight"
+          
         >
-         Step Into  <span className="text-[#0e70f8]">Digital</span> World  We’ve Crafted.
+          <span style={{
+              textShadow: "0px 2px 4px rgba(0,0,0,0.3), 0px 4px 10px rgba(0,0,0,0.2)",
+            }}>Step Into  </span>
+         <span className="text-[#4520e9]">Digital</span><span style={{
+              textShadow: "0px 2px 4px rgba(0,0,0,0.3), 0px 4px 10px rgba(0,0,0,0.2)",
+            }}>World  We’ve Crafted.</span> 
           
         </motion.h1>
       </div>
@@ -23,7 +29,7 @@ const Hero = () => {
         <img
           src={ work }
           alt="Rocket Launch"
-          className="w-120 h-90 md:w-130 md:h-100   "
+          className="   "
         />
       </div>
     </section>

@@ -91,7 +91,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
                 
                 {/* Left Section - Title and Link */}
                 <div className="w-full md:w-[15%] flex flex-col items-center justify-center space-y-4 order-2 md:order-1">
-                  <h2 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">{activeCard.name}</h2>
+                  <h2 className="text-3xl md:text-4xl font-bold text-center bg-gradient-to-t from-white via-black to-white bg-clip-text text-transparent">{activeCard.name}</h2>
                   <a
                     href={activeCard.link || "#"}
                     target="_blank"
@@ -121,12 +121,12 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
               <img
                 src={activeCard.portrait_image1 || activeCard.image}
                 alt=""
-                className="w-full max-h-[90vh] aspect-[4/5] object-cover rounded-4xl"
+                className="w-full max-h-[90vh] aspect-[4/5] object-cover object-center rounded-4xl"
               />
               <img
                 src={activeCard.portrait_image2 || activeCard.image}
                 alt=""
-                className="w-full max-h-[90vh] aspect-[4/5] object-cover object-bottom rounded-4xl"
+                className="w-full max-h-[90vh] aspect-[4/5] object-cover object-center rounded-4xl"
               />
             </div>
 
@@ -149,10 +149,10 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
 
               {/* Text Section */}
               <div className="w-full md:w-2/5 flex flex-col justify-center text-start md:text-left p-2 md:p-3">
-                <h3 className="text-3xl bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent md:text-5xl font-semibold mb-4">
+                <h3 className="text-3xl bg-gradient-to-t from-white via-black to-white  bg-clip-text text-transparent md:text-5xl font-semibold mb-4">
                   {activeCard.full_name || "Feature Title"}
                 </h3>
-                <p className="text-lg bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent md:text-2xl text-justify ">
+                <p className="text-lg bg-black   bg-clip-text text-transparent md:text-2xl text-justify ">
                   {activeCard.description || "Description goes here for this section. go get it Description goes here for this section"}
                 </p>
               </div>
@@ -168,7 +168,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
   <div className="w-full md:w-1/2 flex justify-center my-auto items-center">
     <div className="text-center md:text-left space-y-6">
       <h3 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900">
-        <span className="bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">
+        <span className="bg-gradient-to-t from-white via-black to-white bg-clip-text text-transparent">
           Tech Used
         </span>
       </h3>
@@ -177,7 +177,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
         {(activeCard.tech_used || ["Point 1", "Point 2", "Point 3", "Point 4", "Point 5"]).map((point, idx) => (
           <li key={idx} className="flex items-start gap-3">
             <Sparkles className="w-5 h-5 mt-1 text-purple-500" />
-            <span className="text-lg sm:text-xl md:text-2xl font-semibold bg-gradient-to-r from-pink-500 via-black/55 to-indigo-500 bg-clip-text text-transparent">
+            <span className="text-lg sm:text-xl md:text-2xl font-semibold ">
               {point}
             </span>
           </li>
@@ -191,7 +191,7 @@ const Modal = ({ activeCard, setActiveCard, scrolled, setScrolled }) => {
     <img
       src={activeCard.portrait_image3 }
       alt="Highlight"
-      className="w-full max-w-[500px] h-[60vh] md:h-[90vh] object-cover rounded-xl shadow-lg"
+      className="w-full max-w-[500px] h-[60vh] md:h-[90vh] object-cover object-center rounded-xl shadow-lg"
     />
   </div>
 </div>

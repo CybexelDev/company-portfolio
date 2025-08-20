@@ -15,8 +15,14 @@ const ExpertiseHero = () => {
           transition={{ duration: 1 }}
           className="text-5xl md:text-6xl font-bold    leading-tight"
         >
-          We Build With <span className="text-[#0e70f8]">Code</span> <br /> 
-          But Think In Dreams.
+          
+          <span style={{
+              textShadow: "0px 2px 4px rgba(0,0,0,0.3), 4px 4px 4px rgba(0,0,0,0.2)",
+            }}>We Build <br/> With </span>
+          <span className="text-blue-600">Code </span>
+          <span style={{
+              textShadow: "0px 2px 4px rgba(0,0,0,0.3), 4px 4px 4px rgba(0,0,0,0.2)",
+            }}>But <br />Think In Dreams.</span>
           
         </motion.h1>
       </div>

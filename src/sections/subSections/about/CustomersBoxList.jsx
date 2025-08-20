@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { fetchCustomers } from "../../../api/api"; // Make sure this function is correct
+import { fetchCustomers } from "../../../api/api"; // Ensure API is correct
 
 const CustomersBoxList = () => {
   const [customers, setCustomers] = useState([]);
@@ -8,9 +8,8 @@ const CustomersBoxList = () => {
 
   useEffect(() => {
     fetchCustomers()
-    
       .then((res) => {
-        setCustomers(res.data);
+        setCustomers(res.data || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -18,37 +17,45 @@ const CustomersBoxList = () => {
         setLoading(false);
       });
   }, []);
-  
 
   const renderRow = (direction = "left", rowIndex) => {
+    if (customers.length === 0) return null;
+
     const isLeft = direction === "left";
     const animateX = isLeft ? ["0%", "-100%"] : ["-100%", "0%"];
-    const data = [...customers, ...customers]; // Duplicate for seamless scroll
+
+    // Duplicate customers to create seamless infinite scroll
+    const data = [...customers, ...customers];
 
     return (
       <div
         key={rowIndex}
-        className="relative overflow-hidden w-full py-2"
-        style={{ height: "220px" }}
+        className="relative overflow-hidden w-full py-3"
       >
         <motion.div
           className="flex whitespace-nowrap"
           animate={{ x: animateX }}
           transition={{
-            duration: 20,
+            duration: 30, // adjust speed here
             ease: "linear",
             repeat: Infinity,
           }}
         >
-          {data.map((customers, idx) => (
+          {data.map((customer, idx) => (
             <div
               key={`${rowIndex}-${idx}`}
-              className="relative flex-shrink-0 w-[30vw] min-w-[150px] max-w-[300px] h-[200px] rounded-2xl overflow-hidden mx-3 shadow-md"
+              className="relative flex-shrink-0 
+                w-[65vw] sm:w-[40vw] md:w-[25vw] lg:w-[18vw] 
+                min-w-[120px] max-w-[280px] 
+                h-[120px] sm:h-[150px] md:h-[180px] lg:h-[200px] xl:h-[220px]
+                rounded-2xl overflow-hidden mx-3
+                bg-white shadow-lg flex items-center justify-center
+              "
             >
               <img
-                src={customers.logo}
-                alt={customers.name}
-                className="absolute inset-0 w-full h-full object-cover"
+                src={customer.logo}
+                alt={customer.name}
+                className="w-full h-full object-contain p-3"
               />
             </div>
           ))}
@@ -57,10 +64,10 @@ const CustomersBoxList = () => {
     );
   };
 
-  if (loading) return <div className="text-center py-4">Loading...</div>;
+  if (loading) return <div className="text-center py-6">Loading...</div>;
 
   return (
-    <div className="w-full space-y-2 overflow-hidden sm:px-0 md:px-0 rounded-3xl">
+    <div className="w-full space-y-4 px-3 sm:px-6 md:px-10 rounded-3xl">
       {renderRow("left", 0)}
       {renderRow("right", 1)}
     </div>

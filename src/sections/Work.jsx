@@ -6,7 +6,7 @@ import CardGridWithModal from './subSections/work/CardGridWithModal';
 
 function Work() {
   return (
-    <div className='bg-gradient-to-r from-green-100 via-blue-100 to-blue-100 '>
+    <div className='bg-gradient-to-t from-green-100 via-blue-200 to-blue-100 '>
       <ScrollToTop />
       <Hero />
       <CardGridWithModal />

@@ -23,8 +23,8 @@ function Home() {
   },[scrollY]);
 
   return (
-    <main id="home" className= {` ${
-       bgChange ? "bg-[#72cafd] " : "bg-gradient-to-tr from-blue-200 via-purple-200 to-blue-200"} transition-all duration-1000 ease-linear `}>
+    <main id="home"
+     className=  " bg-gradient-to-tr from-purple-100 via-yellow-50  to-pink-100">
       {/* Hero Section */}
         <ScrollToTop /> 
         <Hero />
