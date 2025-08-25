@@ -7,7 +7,7 @@ import cont from "../../../assets/images/cont.webp"
 const Hero = () => {
   const [isModalOpen, setModalOpen] = useState(false);  
   return (
-    <section className="md:h-[90vh] h-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-20 py-10   ">
+    <section className="md:h-[90vh] h-auto flex flex-col md:flex-row items-center justify-between px-4 md:px-40 py-0   ">
       
       {/* Text Section */}
       <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left">

@@ -254,7 +254,7 @@ const CardBox = ({ card, setActiveCard, setScrolled, aspect, className }) => {
       <div className="absolute inset-0 flex items-center justify-center z-30">
         <div
           className="
-            md:w-[25%] aspect-[2/1] w-[50%] rounded-full 
+            md:w-[25%] aspect-[2/1] w-[50%] max-w-[9rem] rounded-full 
             bg-[#4025e9]/70 backdrop-blur-md 
             flex items-center justify-center 
             text-[clamp(0.8rem,1.5vw,1.1rem)] md:text-2xl font-semibold text-white

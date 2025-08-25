@@ -63,7 +63,7 @@ const ImageSection = () => {
           <div
             className="
               md:w-[15%] aspect-[2/1] w-[25%] rounded-full 
-              md:bg-[#4025e9]/70 bg-[#4025e9] backdrop-blur-md 
+              md:bg-[#691783]/70 bg-[#691783]  
               flex items-center justify-center 
               text-[clamp(0.8rem,1.5vw,1.1rem)] md:text-2xl font-semibold text-white
               opacity-70 group-hover:opacity-100 
@@ -112,7 +112,7 @@ const CardBoxLink = ({ item }) => {
         <div
           className="
             md:w-[20%] aspect-[2/1] w-[50%] rounded-full 
-            bg-[#4025e9]/70 backdrop-blur-md 
+            bg-[#691783]/70 backdrop-blur-md 
             flex items-center justify-center 
             text-[clamp(0.8rem,1.5vw,1rem)] md:text-xl font-semibold text-white
             opacity-70 group-hover:opacity-100 

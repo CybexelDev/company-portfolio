@@ -22,7 +22,7 @@ const QuoteSect = () => {
         className="sticky top-20 z-10 rounded-xl overflow-hidden w-[95%] mx-auto flex items-center justify-center"
       >
         {/* Centered Video */}
-        <div className="w-full md:w-[85%] h-full flex items-center justify-center">
+        <div className="w-full md:w-[60%] h-full flex items-center justify-center rounded-3xl">
           <video
             src={nmevideo}
             autoPlay
@@ -30,7 +30,7 @@ const QuoteSect = () => {
             muted
             playsInline
             className="
-              w-full h-full rounded-xl shadow-lg
+              w-full h-full rounded-3xl shadow-lg
               md:object-fill object-contain
               aspect-[3/2] md:aspect-auto
             "

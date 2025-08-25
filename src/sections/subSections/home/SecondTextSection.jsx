@@ -50,7 +50,7 @@ const Hero = () => {
               You dream it bold, we shape it bright — <br />
               From spark to story, from name to light. <br />
             </span>
-            <span className="text-blue-600">All digital, all you.</span>
+            <span className="text-[#691783]">All digital, all you.</span>
           </motion.h1>
         </div>
       </div>
